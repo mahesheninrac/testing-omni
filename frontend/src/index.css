@@ -2,3 +2,12 @@
   max-width: 300px;
 }
  */
+th {
+  background-color: #f0b762 !important;
+  border: 1px solid black !important;
+  border-right: none;
+}
+
+th:last-child {
+  border-right: 1px solid black !important;
+}

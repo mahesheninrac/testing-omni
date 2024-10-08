@@ -101,8 +101,8 @@ function Transactions() {
           </div>
           <div className="col-md-12 mt-3">
             <table className="table table-bordered">
-              <thead>
-                <tr>
+              <thead >
+                <tr >
                   <th>ID</th>
                   <th>Title</th>
                   <th className="d-md-block d-none">Description</th>
