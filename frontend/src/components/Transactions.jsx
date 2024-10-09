@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import DUMMYDATA from "../../../backend/dummyData.json";
+import Statistics from "./Statistics";
 
 const MONTHS = [
   {
@@ -58,6 +59,8 @@ function Transactions() {
   const [page, setPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
 
+  const prevbtnClass = page <= 1 ? "d-none" : "d-inline-block";
+
   return (
     <div className="container mx-auto">
       <div className="my-5 text-center">
@@ -101,8 +104,8 @@ function Transactions() {
           </div>
           <div className="col-md-12 mt-3">
             <table className="table table-bordered">
-              <thead >
-                <tr >
+              <thead>
+                <tr>
                   <th>ID</th>
                   <th>Title</th>
                   <th className="d-md-block d-none">Description</th>
@@ -117,10 +120,12 @@ function Transactions() {
                   <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.title}</td>
-                    <td className="d-md-block d-none">{item.description.slice(0, 101)}.</td>
+                    <td className="d-md-block d-none">
+                      {item.description.slice(0, 101)}.
+                    </td>
                     <td>{item.price.toFixed(2)}</td>
                     <td>{item.category}</td>
-                    <td>{item.sold}</td>
+                    <td>{item.sold == true ? 1 : 0}</td>
                     <td>
                       <img
                         height={"100px"}
@@ -134,15 +139,33 @@ function Transactions() {
             </table>
           </div>
           <div className="col-md-12">
-            <div className="col-md-4">
-              <p>Page No: 1</p>
-            </div>
-            <div className="col-md-4"></div>
-            <div className="col-md-4">
-              <p>Per Page: 10</p>
+            <div className="row">
+              <div className="col-md-4">
+                <p className="font-weight-bold">Page No: {page}</p>
+              </div>
+              <div className="col-md-4 text-center font-weight-bold">
+                <span role="button" onClick={() => setPage((prev) => prev + 1)}>
+                  Next
+                </span>
+                <span className="mx-2"> &#8211;</span>
+                <span
+                  role="button"
+                  className={prevbtnClass}
+                  onClick={() =>
+                    setPage((prev) => (prev > 1 ? prev - 1 : prev))
+                  }
+                >
+                  Prev
+                </span>
+              </div>
+              <div className="col-md-4 text-end">
+                <p className="font-weight-bold">Per Page: 10</p>
+              </div>
             </div>
           </div>
-          <div className="col-md-12"></div>
+          <div className="col-md-12">
+            <Statistics selectedMonth={selectedMonth} />
+          </div>
           <div className="col-md-12"></div>
         </div>
       </div>
